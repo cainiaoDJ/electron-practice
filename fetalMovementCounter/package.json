@@ -1,0 +1,14 @@
+{
+  "name": "fetalMovementCounter",
+  "version": "1.0.0",
+  "description": "胎动计数器",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "cainiaodj",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^7.1.7"
+  }
+}
