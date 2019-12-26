@@ -1,5 +1,5 @@
 {
-  "name": "fetalMovementCounter",
+  "name": "fetal_movement_counter",
   "version": "1.0.0",
   "description": "胎动计数器",
   "main": "main.js",

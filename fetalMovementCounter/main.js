@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu } = require('electron')
+const { app, BrowserWindow, dialog, ipcMain } = require('electron')
 
 // 保持对window对象的全局引用，如果不这么做的话，当JavaScript对象被
 // 垃圾回收的时候，window对象将会自动的关闭
@@ -10,6 +10,7 @@ function createWindow() {
     win = new BrowserWindow({
         width: 800,
         height: 600,
+        show: false,
         webPreferences: {
             nodeIntegration: true
         }
@@ -17,8 +18,6 @@ function createWindow() {
 
     // 加载index.html文件
     win.loadFile('index.html')
-    // 打开开发者工具
-    // win.webContents.openDevTools()
     // 当 window 被关闭，这个事件会被触发。
     win.on('closed', () => {
         // 取消引用 window 对象，如果你的应用支持多窗口的话，
@@ -26,6 +25,13 @@ function createWindow() {
         // 与此同时，你应该删除相应的元素。
         // win = null
         app.quit()
+    })
+    // 打开开发者工具
+    // win.webContents.openDevTools()
+    win.once('ready-to-show', () => {
+        win.show()
+        win.webContents.send('init_timer', '1')
+        console.log("send timer ready")
     })
 
 }
@@ -54,3 +60,17 @@ app.on('activate', () => {
 
 // 在这个文件中，你可以续写应用剩下主进程代码。
 // 也可以拆分成几个文件，然后用 require 导入。
+
+ipcMain.on('open-devtools', (event, arg) => {
+    if (win.webContents.isDevToolsOpened()) {
+        event.reply('main-msg', 'devtools is opened')
+    } else {
+        win.webContents.openDevTools()
+    }
+})
+
+ipcMain.on('render-msg', (event, arg) => {
+    if (arg == 'open-devtools') {
+        dialog.showMessageBox({ type: "question", title: "123", message: "确定要打开调试窗口吗", buttons: ["是", "否"] })
+    }
+})
