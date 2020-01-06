@@ -41,7 +41,7 @@ btn.onclick = () => {
     }
     lastUpdateTime = nowTime;
     totalCnt++;
-    let h = '<tr><td>' + dateFormat(remain) + '</td><td>' + cnt + '次' + '(' + totalCnt + ')' + '</td></tr>';
+    let h = '<tr><td>' + dateFormat(remain) + '</td><td>' + cnt + '次' + '(总点击:' + totalCnt + '次)' + '</td></tr>';
     let th = document.querySelector('#tb_history tbody');
     th.innerHTML = h + th.innerHTML;
 }
@@ -58,7 +58,7 @@ function timeDown() {
         timerId = setTimeout(timeDown, 1000);
     } else {
         clearTimeout(timerId)
-        tr += "<td style='text-align:center'>倒计时结束</td>" + "<td style='text-align:center'>" + cnt + "</td></tr>"
+        tr += "<td style='text-align:center'>倒计时结束[正常值:3~5次]</td>" + "<td style='text-align:center'>" + cnt + "</td></tr>"
     }
     tb.innerHTML += tr;
     document.querySelector('#progress_remain').setAttribute("style", "width:" + parseFloat((remain / COUNT_DOWN) * 100) + "%");
