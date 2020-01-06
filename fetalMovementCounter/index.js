@@ -33,13 +33,13 @@ btn.onclick = () => {
     }
     if (lastUpdateTime === 0 || nowTime - lastUpdateTime >= COUNT_GAP) {
         cnt++;
-        lastUpdateTime = nowTime;
         let tb = document.querySelector('#tb_countdown tbody');
         tb.innerHTML = '';
         let tr = "<tr>";
         tr += "<td style='text-align:center'>" + dateFormat(remain) + "</td>" + "<td style='text-align:center'>" + cnt + "次</td></tr>";
         tb.innerHTML += tr;
     }
+    lastUpdateTime = nowTime;
     totalCnt++;
     let h = '<tr><td>' + dateFormat(remain) + '</td><td>' + cnt + '次' + '(' + totalCnt + ')' + '</td></tr>';
     let th = document.querySelector('#tb_history tbody');
