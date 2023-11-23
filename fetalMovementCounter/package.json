@@ -9,6 +9,6 @@
   "author": "cainiaodj",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^18.3.7"
+    "electron": "^27.1.2"
   }
 }
